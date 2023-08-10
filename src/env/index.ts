@@ -14,5 +14,6 @@ if (_env.success === false) {
 
   throw new Error('Invalid environment variables.')
 }
+console.log('asdwd')
 
 export const env = _env.data
