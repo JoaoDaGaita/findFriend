@@ -17,7 +17,7 @@ interface CreatePetServiceResponse {
   pet: Pet
 }
 
-export class PetService {
+export class CreatePetService {
   constructor(private petRepository: PetsRepository) {}
 
   async execute({
