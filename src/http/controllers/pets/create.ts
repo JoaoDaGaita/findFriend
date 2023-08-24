@@ -39,6 +39,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     requirement,
     size,
     photo,
+    org_id: request.user.sub,
   })
 
   return reply.status(201).send()

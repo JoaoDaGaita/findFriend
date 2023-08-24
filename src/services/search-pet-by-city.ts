@@ -1,12 +1,12 @@
 import { PetsRepository } from '@/repositories/pets-repository'
-import { SIZE } from '@prisma/client'
+import { Pet } from '@prisma/client'
 
 interface SearchPetServiceRequest {
   city: string
 }
 
 interface SearchPetServiceResponse {
-  pets: { name: string; age: number; size: SIZE }[]
+  pets: Pet[]
 }
 
 export class SearchByCityPetService {

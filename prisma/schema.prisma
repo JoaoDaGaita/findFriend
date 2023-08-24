@@ -10,6 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ROLE {
+  ADMIN
+  MEMBER
+}
+
 enum SIZE {
   SMALL
   MEDIUM
@@ -29,19 +34,20 @@ model Pet {
   requirement       String
   created_at        DateTime @default(now())
 
-  Org    Org?    @relation(fields: [org_id], references: [id])
-  org_id String?
+  Org    Org    @relation(fields: [org_id], references: [id])
+  org_id String
 
   @@map("pets")
 }
 
 model Org {
-  id       String @id @default(uuid())
-  email    String @unique
-  zipCode  String @unique
-  address  String
-  whatsapp String @unique
-  password String
+  id            String @id @default(uuid())
+  email         String @unique
+  zipCode       String @unique
+  address       String
+  role          ROLE   @default(MEMBER)
+  whatsapp      String @unique
+  password_hash String
 
   pets       Pet[]
   created_at DateTime @default(now())

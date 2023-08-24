@@ -1,29 +1,20 @@
-/*
-  Warnings:
+-- CreateEnum
+CREATE TYPE "ROLE" AS ENUM ('ADMIN', 'MEMBER');
 
-  - You are about to drop the `Org` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Pet` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropForeignKey
-ALTER TABLE "Pet" DROP CONSTRAINT "Pet_org_id_fkey";
-
--- DropTable
-DROP TABLE "Org";
-
--- DropTable
-DROP TABLE "Pet";
+-- CreateEnum
+CREATE TYPE "SIZE" AS ENUM ('SMALL', 'MEDIUM', 'LARGE');
 
 -- CreateTable
 CREATE TABLE "pets" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "age" TEXT NOT NULL,
-    "size" TEXT NOT NULL,
+    "age" INTEGER NOT NULL,
+    "size" "SIZE" NOT NULL DEFAULT 'MEDIUM',
+    "city" TEXT NOT NULL,
     "energyLevel" TEXT NOT NULL,
-    "indepencyLevel" TEXT NOT NULL,
-    "environment" TEXT NOT NULL,
-    "photos" BYTEA[],
+    "independencyLevel" TEXT NOT NULL,
+    "petPlace" TEXT NOT NULL,
+    "photo" TEXT NOT NULL,
     "requirement" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "org_id" TEXT,
@@ -37,8 +28,9 @@ CREATE TABLE "orgs" (
     "email" TEXT NOT NULL,
     "zipCode" TEXT NOT NULL,
     "address" TEXT NOT NULL,
+    "role" "ROLE" NOT NULL DEFAULT 'MEMBER',
     "whatsapp" TEXT NOT NULL,
-    "password" TEXT NOT NULL,
+    "password_hash" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "orgs_pkey" PRIMARY KEY ("id")
@@ -49,6 +41,9 @@ CREATE UNIQUE INDEX "orgs_email_key" ON "orgs"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "orgs_zipCode_key" ON "orgs"("zipCode");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "orgs_whatsapp_key" ON "orgs"("whatsapp");
 
 -- AddForeignKey
 ALTER TABLE "pets" ADD CONSTRAINT "pets_org_id_fkey" FOREIGN KEY ("org_id") REFERENCES "orgs"("id") ON DELETE SET NULL ON UPDATE CASCADE;

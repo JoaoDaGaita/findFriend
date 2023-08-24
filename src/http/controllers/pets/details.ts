@@ -13,9 +13,9 @@ export async function details(request: FastifyRequest, reply: FastifyReply) {
 
   const detailsPetService = makeDetailsService()
 
-  const { pet } = await detailsPetService.execute({
+  const { pet, whatsapp } = await detailsPetService.execute({
     id,
   })
 
-  return reply.status(200).send({ pet })
+  return reply.status(200).send({ pet, whatsapp })
 }

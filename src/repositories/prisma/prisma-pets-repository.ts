@@ -38,27 +38,14 @@ export class PrismaPetsRepository implements PetsRepository {
       where: {
         city,
       },
-
-      select: {
-        age: true,
-        name: true,
-        size: true,
-        id: false,
-        city: false,
-        created_at: false,
-        energyLevel: false,
-        independencyLevel: false,
-        Org: false,
-        org_id: false,
-        petPlace: false,
-        photo: false,
-        requirement: false,
-      },
     })
+
     return pets
   }
 
   async create(data: Prisma.PetCreateInput) {
+    console.log(data)
+
     const pet = await prisma.pet.create({
       data,
     })

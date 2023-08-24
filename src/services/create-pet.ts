@@ -11,6 +11,7 @@ interface CreatePetServiceRequest {
   petPlace: string
   photo: string
   requirement: string
+  org_id: string
 }
 
 interface CreatePetServiceResponse {
@@ -30,6 +31,7 @@ export class CreatePetService {
     requirement,
     size,
     photo,
+    org_id,
   }: CreatePetServiceRequest): Promise<CreatePetServiceResponse> {
     const pet = await this.petRepository.create({
       age,
@@ -41,6 +43,7 @@ export class CreatePetService {
       size,
       petPlace,
       photo,
+      org_id,
     })
 
     return { pet }
