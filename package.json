@@ -2,7 +2,8 @@
   "scripts": {
     "start:dev": "tsx watch src/server.ts",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "lint": "eslint --ext .ts --ignore-path .gitignore ."
   },
   "dependencies": {
     "@fastify/cookie": "^9.0.4",

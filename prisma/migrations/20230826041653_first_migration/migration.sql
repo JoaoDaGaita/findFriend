@@ -17,7 +17,7 @@ CREATE TABLE "pets" (
     "photo" TEXT NOT NULL,
     "requirement" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "org_id" TEXT,
+    "org_id" TEXT NOT NULL,
 
     CONSTRAINT "pets_pkey" PRIMARY KEY ("id")
 );
@@ -25,6 +25,7 @@ CREATE TABLE "pets" (
 -- CreateTable
 CREATE TABLE "orgs" (
     "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "zipCode" TEXT NOT NULL,
     "address" TEXT NOT NULL,
@@ -37,6 +38,9 @@ CREATE TABLE "orgs" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "orgs_name_key" ON "orgs"("name");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "orgs_email_key" ON "orgs"("email");
 
 -- CreateIndex
@@ -46,4 +50,4 @@ CREATE UNIQUE INDEX "orgs_zipCode_key" ON "orgs"("zipCode");
 CREATE UNIQUE INDEX "orgs_whatsapp_key" ON "orgs"("whatsapp");
 
 -- AddForeignKey
-ALTER TABLE "pets" ADD CONSTRAINT "pets_org_id_fkey" FOREIGN KEY ("org_id") REFERENCES "orgs"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "pets" ADD CONSTRAINT "pets_org_id_fkey" FOREIGN KEY ("org_id") REFERENCES "orgs"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

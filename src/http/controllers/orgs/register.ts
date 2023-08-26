@@ -6,6 +6,7 @@ import { makeRegisterOrgService } from '@/services/factories/make-register-org-s
 export async function register(request: FastifyRequest, reply: FastifyReply) {
   const registerBodySchema = z.object({
     email: z.string().email(),
+    name: z.string(),
     zipCode: z.string(),
     address: z.string(),
     whatsapp: z.string(),
@@ -18,7 +19,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
 
   const orgService = makeRegisterOrgService()
 
-  await orgService.execute({ email, zipCode, address, whatsapp, password })
+  await orgService.execute({ name, email, zipCode, address, whatsapp, password })
 
   return reply.status(201).send()
 }
